@@ -62,7 +62,7 @@ app.get("*", (req,res)=>{
 
     res.status(404).json({
         status: "404",
-        message: "Page not found! Version 2"
+        message: "Page not found! Version 3"
     });
 });
 
