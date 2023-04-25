@@ -28,7 +28,7 @@ let registerUser = asyncHandler(async (req, res) => {
 
 	req.body.password = hashPassword;
 	req.body.imageUrl = imageUrl;
-
+	req.body.isAdmin = 0;
 	let profileData = await Profile(req.body);
 
 	try {
@@ -186,6 +186,51 @@ let rescuedPets = asyncHandler(async (req,res)=> {
 
 });
 
+let adoptedPets = asyncHandler(async (req,res)=> {
+
+	const profilesList = await Profile.findById(req.params.id);
+
+	const rescued = await Pet.find({ _id: { $in: profilesList.adopted } });
+
+	console.log(rescued, "idhar bhai idhar");
+
+	res.status(200).json({
+		status:200,
+		data: rescued,
+		message: "Got It!"
+	})
+	
+
+});
+
+let passwordChange = asyncHandler(async (req, res) => {
+  console.log(req.body);
+
+  const user = await Profile.findById(req.params.id);
+
+  if (user && (await bcrypt.compare(req.body.oldPassword, user.password))) {
+
+	const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(req.body.newPassword, salt);
+
+	user.password = hashPassword;
+	await user.save();
+
+    res.status(200).json({
+      status: 200,
+      message: "Password Changed!"
+    });
+
+  } else {
+
+    res.status(200).json({
+      status: 400,
+      message: "Invalid credentials",
+    });
+
+  }
+});
+
 
 
 //Generate JWtoken
@@ -202,5 +247,7 @@ module.exports = {
   loginUser,
   listProfiles,
   makeAdmin,
-  rescuedPets
+  adoptedPets,
+  rescuedPets,
+  passwordChange
 };

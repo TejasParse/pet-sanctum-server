@@ -7,11 +7,14 @@ const {clearHash} = require('../services/cache')
 // GET
 let getPets = asyncHandler(async (req, res) => {
     let { filter } = req.params;
-    let searchJson = {}
+    let searchJson = {
+        isAdopt: -1
+    }
     
     if(filter!=="all") {
         searchJson = {
-            type: filter
+            type: filter,
+            isAdopt: -1
         }
     }
 
@@ -62,7 +65,7 @@ let getPetById = asyncHandler(async (req, res) => {
 let addPet = asyncHandler(async (req,res) => {
 
     let profile = req.file;
-    console.log(profile);
+    // console.log(profile);
     const profiled = await Profile.findById(req.params.username)
     
     try {
@@ -179,10 +182,71 @@ let deletePet = asyncHandler(async (req, res) => {
 	}
 });
 
+let AdoptPet = asyncHandler(async (req, res) => {
+	
+	try {
+		const tp1 = await Profile.findById(req.params.userid);
+        const pet = await Pet.findById(req.params.petid);
+
+        console.log("I am here", req.params.userid, req.params.petid);
+
+        pet.isAdopt = tp1._id;
+        pet.owner = tp1.fname + " " + tp1.lname
+        pet.phone = tp1.phone
+        pet.address = tp1.address
+        pet.pincode = tp1.pincode
+        await pet.save();
+
+        tp1.adopted.push(pet);
+        await tp1.save();
+
+
+        clearHash("default");
+
+		res.json({
+			"status": "200",
+			message: "Deleted Profile Succesfully",
+		})
+
+	} catch(err) {
+		res.json({
+			"status": 400,
+			"message": err.message
+		})
+	}
+});
+
+let totalAdopted = asyncHandler(async (req, res) => {
+	
+	try {
+
+        const pet = await Pet.find({
+            isAdopt: {
+                $ne: "-1"
+            }
+        })
+
+		res.json({
+			"status": "200",
+			message: "Deleted Profile Succesfully",
+            data: pet
+		})
+
+	} catch(err) {
+		res.json({
+			"status": 400,
+			"message": err.message
+		})
+	}
+});
+
+
 module.exports = {
     getPets,
     getPetById,
     addPet,
     searchPet,
-    deletePet
+    deletePet,
+    AdoptPet,
+    totalAdopted
 };

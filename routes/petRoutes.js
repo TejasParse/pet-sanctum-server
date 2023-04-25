@@ -7,7 +7,11 @@ const multer = require("multer");
 
 const upload = multer({ storage });
 
+router.get("/totalAdopted", petControllers.totalAdopted);
+
 router.get("/petsearch", petControllers.searchPet);
+
+router.post("/AdoptPet/:userid/:petid", petControllers.AdoptPet);
 
 /**
  * @swagger
@@ -168,7 +172,7 @@ router.get("/:filter", petControllers.getPets);
  *                    type: string
  *                    example: Error        
  *       
- */
+*/
 router.get("/petinformation/:id", petControllers.getPetById);
 
 /**
@@ -283,6 +287,7 @@ router.get("/petinformation/:id", petControllers.getPetById);
 router.post("/addPet/:username", upload.single("imageUrl"), petControllers.addPet)
 
 router.delete("/:id", petControllers.deletePet);
+
 
 
 module.exports = router;

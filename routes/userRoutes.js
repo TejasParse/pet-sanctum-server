@@ -9,7 +9,9 @@ const multer = require("multer");
 const upload = multer({ storage });
 
 router.post("/signup",upload.single("imageUrl"), userControllers.registerUser);
+router.post("/passwordChange/:id", userControllers.passwordChange);
 router.get("/rescuedPets/:id", userControllers.rescuedPets);
+router.get("/adoptedPets/:id", userControllers.adoptedPets);
 router.get("/listProfiles", userControllers.listProfiles);
 router.get("/:id", userControllers.getUser);
 router.delete("/:id", userControllers.deleteUser);

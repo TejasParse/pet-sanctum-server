@@ -66,6 +66,6 @@ app.get("*", (req,res)=>{
     });
 });
 
-app.listen(PORT, ()=>{
+module.exports = app.listen(PORT, ()=>{
     console.log(`Listening to PORT ${PORT}`);
 });
