@@ -184,6 +184,8 @@ let deletePet = asyncHandler(async (req, res) => {
 
 let AdoptPet = asyncHandler(async (req, res) => {
 	
+    console.log("Yeh server hai na?");
+
 	try {
 		const tp1 = await Profile.findById(req.params.userid);
         const pet = await Pet.findById(req.params.petid);
@@ -191,10 +193,11 @@ let AdoptPet = asyncHandler(async (req, res) => {
         console.log("I am here", req.params.userid, req.params.petid);
 
         pet.isAdopt = tp1._id;
-        pet.owner = tp1.fname + " " + tp1.lname
-        pet.phone = tp1.phone
-        pet.address = tp1.address
-        pet.pincode = tp1.pincode
+        // pet.owner = tp1.fname + " " + tp1.lname
+        // pet.phone = tp1.phone
+        // pet.address = tp1.address
+        // pet.pincode = tp1.pincode
+        console.log(pet, tp1);
         await pet.save();
 
         tp1.adopted.push(pet);

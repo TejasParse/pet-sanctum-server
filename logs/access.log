@@ -30,3 +30,5 @@
 ::ffff:127.0.0.1 - - [25/Apr/2023:01:00:23 +0000] "POST /api/login HTTP/1.1" 404 149 "-" "node-superagent/3.8.3"
 ::ffff:127.0.0.1 - - [25/Apr/2023:01:00:23 +0000] "POST /api/login HTTP/1.1" 404 149 "-" "node-superagent/3.8.3"
 ::ffff:127.0.0.1 - - [25/Apr/2023:01:01:28 +0000] "POST /api/login HTTP/1.1" 404 149 "-" "node-superagent/3.8.3"
+::1 - - [25/Apr/2023:02:02:46 +0000] "GET /serviceworker.js HTTP/1.1" 404 54 "http://localhost:4000/serviceworker.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
+::1 - - [25/Apr/2023:02:03:16 +0000] "GET /serviceworker.js HTTP/1.1" 404 54 "http://localhost:4000/serviceworker.js" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
