@@ -16,7 +16,7 @@ const connectDb = require("./config/db");
 const swaggerJSDoc = require("swagger-jsdoc");
 connectDb();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 
 const options = {
@@ -29,7 +29,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:4000"
+                url: "http://localhost:8000"
             }
         ]
     },

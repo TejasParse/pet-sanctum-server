@@ -1,8 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const { Pet } = require("../models/Pets");
 const { Profile }  = require("../models/Profile");
-require('../services/cache')
-const {clearHash} = require('../services/cache')
+// require('../services/cache')
+// const {clearHash} = require('../services/cache')
 
 // GET
 let getPets = asyncHandler(async (req, res) => {
@@ -19,7 +19,7 @@ let getPets = asyncHandler(async (req, res) => {
     }
 
     try {
-        const petsData = await Pet.find(searchJson).cache();
+        const petsData = await Pet.find(searchJson);
 
         res.json({
             status: "200",
@@ -86,7 +86,7 @@ let addPet = asyncHandler(async (req,res) => {
             message: "Pet has been added!",
             data: pet1
         });
-        clearHash('default')
+        // clearHash('default')
 
     } catch(err) {
         console.log(err);
@@ -204,7 +204,7 @@ let AdoptPet = asyncHandler(async (req, res) => {
         await tp1.save();
 
 
-        clearHash("default");
+        // clearHash("default");
 
 		res.json({
 			"status": "200",
