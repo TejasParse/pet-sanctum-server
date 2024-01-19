@@ -17,7 +17,7 @@ let registerUser = asyncHandler(async (req, res) => {
 	let userExists = await Profile.findOne({ username });
 
 	if(userExists) {
-		return res.status(200).json({
+		return res.status(400).json({
 			status:400,
 			message: "Username already taken"
 		});
@@ -43,9 +43,9 @@ let registerUser = asyncHandler(async (req, res) => {
 		
 	} catch(err) {
 		console.log(err);
-		res.status(200).json({
-			status: 400,
-			message: "Error",
+		res.status(500).json({
+			status: 500,
+			message: err.message,
 		});
 	}
 
@@ -53,37 +53,36 @@ let registerUser = asyncHandler(async (req, res) => {
 
 //GET
 let getUser = asyncHandler(async (req, res) => {
-	const {_id, fname, lname, phone, username,
-			email, address, state, zip, city,
-			imageUrl, isAdmin, adopted, rescued} = req.user
+	// const {_id, fname, lname, phone, username,
+	// 		email, address, state, zip, city,
+	// 		imageUrl, isAdmin, adopted, rescued} = req.user
 	
-	res.status(200).json({id: _id, fname, lname, phone, username,
-		email, address, state, zip, city,
-		imageUrl, isAdmin, adopted, rescued})
+	// res.status(200).json({id: _id, fname, lname, phone, username,
+	// 	email, address, state, zip, city,
+	// 	imageUrl, isAdmin, adopted, rescued})
 
-	// let { id } = req.params;
+	let { id } = req.params;
 	
 	// console.log(id);
 
-	// try {
+	try {
 
-	// 	const Profile1 = await Profile.findById(id);
-	// 	console.log(Profile1);
-	// 	res.json({
-	// 		status: "200",
-	// 		message: "User Found",
-	// 		data: Profile1
-	// 	});
+		const Profile1 = await Profile.findById(id);
+		console.log(Profile1);
+		res.status(200).json({
+			status: 200,
+			message: "User Found",
+			data: Profile1
+		});
 
-	// } catch(err) {
-	// 	console.log(err);
-	// 	console.log("ruk jaa bc");
+	} catch(err) {
+		console.log(err);
 
-	// 	res.json({
-	// 		"status" :"400",
-	// 		"message": "User does not exist"
-	// 	});
-	// }
+		res.status(500).json({
+			"status" : 500,
+			"message": err.message
+		});
+	}
 });
 
 //DELETE
@@ -115,7 +114,7 @@ let deleteUser = asyncHandler(async (req, res) => {
 //LOGIN POST
 let loginUser = asyncHandler(async (req,res)=> {
 	const {username, password} = req.body
-	
+	console.log(req.body);
 	const user = await Profile.findOne({username})
 	if(user && (await bcrypt.compare(password, user.password))) {
 		res.status(200).json({
@@ -126,7 +125,7 @@ let loginUser = asyncHandler(async (req,res)=> {
 		})
 	}
 	else {
-		res.status(200).json({
+		res.status(400).json({
 			status: 400,
 			message: 'Invalid credentials'
 		});
@@ -223,7 +222,7 @@ let passwordChange = asyncHandler(async (req, res) => {
 
   } else {
 
-    res.status(200).json({
+    res.status(400).json({
       status: 400,
       message: "Invalid credentials",
     });
