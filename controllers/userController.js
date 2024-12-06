@@ -7,8 +7,8 @@ const bcrypt = require('bcryptjs')
 //POST
 let registerUser = asyncHandler(async (req, res) => {
 	
-	console.log(req.file);
-	console.log(req.body);
+	// console.log(req.file);
+	// console.log(req.body);
 
 	const imageUrl = (req.file) ? req.file.path : null;
 
@@ -68,7 +68,7 @@ let getUser = asyncHandler(async (req, res) => {
 	try {
 
 		const Profile1 = await Profile.findById(id);
-		console.log(Profile1);
+		// console.log(Profile1);
 		res.status(200).json({
 			status: 200,
 			message: "User Found",
@@ -95,7 +95,7 @@ let deleteUser = asyncHandler(async (req, res) => {
 
 		const newProfiles = await Profile.find({});
 
-		console.log("Inside Delete");
+		// console.log("Inside Delete");
 
 		res.json({
 			"status": "200",
@@ -114,7 +114,7 @@ let deleteUser = asyncHandler(async (req, res) => {
 //LOGIN POST
 let loginUser = asyncHandler(async (req,res)=> {
 	const {username, password} = req.body
-	console.log(req.body);
+	// console.log(req.body);
 	const user = await Profile.findOne({username})
 	if(user && (await bcrypt.compare(password, user.password))) {
 		res.status(200).json({
@@ -147,7 +147,7 @@ let listProfiles = asyncHandler(async (req,res)=> {
 
 let makeAdmin = asyncHandler(async (req,res)=> {
 
-	console.log("Setting Admin");
+	// console.log("Setting Admin");
 
 	const profilesList = await Profile.updateOne({
 		_id: req.params.id
@@ -174,7 +174,7 @@ let rescuedPets = asyncHandler(async (req,res)=> {
 
 	const rescued = await Pet.find({ _id: { $in: profilesList.rescued } });
 
-	console.log(rescued, "idhar bhai idhar");
+	// console.log(rescued, "idhar bhai idhar");
 
 	res.status(200).json({
 		status:200,
@@ -191,7 +191,7 @@ let adoptedPets = asyncHandler(async (req,res)=> {
 
 	const rescued = await Pet.find({ _id: { $in: profilesList.adopted } });
 
-	console.log(rescued, "idhar bhai idhar");
+	// console.log(rescued, "idhar bhai idhar");
 
 	res.status(200).json({
 		status:200,
@@ -203,7 +203,7 @@ let adoptedPets = asyncHandler(async (req,res)=> {
 });
 
 let passwordChange = asyncHandler(async (req, res) => {
-  console.log(req.body);
+//   console.log(req.body);
 
   const user = await Profile.findById(req.params.id);
 

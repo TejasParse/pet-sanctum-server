@@ -69,7 +69,7 @@ let addPet = asyncHandler(async (req, res) => {
     const profiled = await Profile.findById(req.params.username)
 
     try {
-        console.log(req.body);
+        // console.log(req.body);
         req.body.imageUrl = req.file
             ? req.file.path
             : "https://hips.hearstapps.com/wdy.h-cdn.co/assets/16/11/3200x1600/1458326940-landscape-gettyimages-530330473-1.jpg?resize=1200:*";
@@ -105,7 +105,7 @@ let searchPet = asyncHandler(async (req, res) => {
     try {
         const temp = req.query;
 
-        console.log(temp);
+        // console.log(temp);
 
         if (temp.search == undefined) // 
         {
@@ -175,7 +175,7 @@ let deletePet = asyncHandler(async (req, res) => {
 
         const newProfiles = await Pet.find({});
 
-        console.log("Inside Delete");
+        // console.log("Inside Delete");
 
         res.status(200).json({
             status: 200,
@@ -193,20 +193,20 @@ let deletePet = asyncHandler(async (req, res) => {
 
 let AdoptPet = asyncHandler(async (req, res) => {
 
-    console.log("Yeh server hai na?");
+    // console.log("Yeh server hai na?");
 
     try {
         const tp1 = await Profile.findById(req.params.userid);
         const pet = await Pet.findById(req.params.petid);
 
-        console.log("I am here", req.params.userid, req.params.petid);
+        // console.log("I am here", req.params.userid, req.params.petid);
 
         pet.isAdopt = tp1._id;
         // pet.owner = tp1.fname + " " + tp1.lname
         // pet.phone = tp1.phone
         // pet.address = tp1.address
         // pet.pincode = tp1.pincode
-        console.log(pet, tp1);
+        // console.log(pet, tp1);
         await pet.save();
 
         tp1.adopted.push(pet);

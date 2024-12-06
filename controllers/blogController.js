@@ -15,7 +15,7 @@ let addBlog = asyncHandler(async (req, res) => {
   await newBlog
     .save()
     .then((hmm) => {
-      console.log(hmm);
+      // console.log(hmm);
 
       res.json({
         status: 200,

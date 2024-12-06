@@ -54,3 +54,4 @@
 ::1 - - [01/Aug/2023:16:09:26 +0000] "GET /favicon.ico HTTP/1.1" 404 54 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
 ::1 - - [01/Aug/2023:16:10:07 +0000] "GET / HTTP/1.1" 404 54 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
 ::ffff:127.0.0.1 - - [19/Jan/2024:20:38:02 +0000] "DELETE /api/notes/ HTTP/1.1" 404 152 "-" "Thunder Client (https://www.thunderclient.com)"
+::1 - - [06/Dec/2024:15:54:42 +0000] "GET /api/v1/auth/verify HTTP/1.1" 404 44 "http://localhost:3011/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
